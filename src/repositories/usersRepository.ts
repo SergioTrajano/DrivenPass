@@ -6,6 +6,12 @@ export async function findUsers() {
     return dbUsers;
 }
 
+export async function findUserByEmail(email: string) {
+    const dbUser = await client.users.findUnique({ where: { email }});
+    
+    return dbUser;
+}
+
 export async function insertUser(userData: Omit<users, "id">) {
     await client.users.create({ data: userData});
 }

@@ -15,3 +15,17 @@ export function validateBody(schema: ObjectSchema) {
         next();
     }
 }
+
+export function validateHeader(schema: ObjectSchema) {
+    return (req: Request, res: Response, next: NextFunction) => {
+        const headers: object = req.headers;
+
+        const { error } = schema.validate(headers, { abortEarly: false });
+
+        if (error) {
+            throw {code: 422, message: error.details.map(e => e.message)};
+        }
+
+        next();
+    }
+}
