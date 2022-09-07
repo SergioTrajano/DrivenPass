@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { ObjectSchema } from "joi";
 
 
-export function validateBody(schema: ObjectSchema) {
+function body(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
         const body: object = req.body;
 
@@ -16,7 +16,7 @@ export function validateBody(schema: ObjectSchema) {
     }
 }
 
-export function validateHeader(schema: ObjectSchema) {
+function header(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
         const headers: object = req.headers;
 
@@ -28,4 +28,9 @@ export function validateHeader(schema: ObjectSchema) {
 
         next();
     }
+}
+
+export const validate = {
+    body,
+    header,
 }

@@ -1,13 +1,12 @@
 import { Router } from "express";
 
 import { userDataSchema } from "../schemas/authorizationSchemas";
-import * as validateSchema from "../middlewares/validateSchemaMIddleware";
+import { validate } from "../middlewares/validateSchemaMIddleware";
 import * as authorizationController from "../controllers/authorizationControllers";
-import headerSchema from "../schemas/headerSchema";
 
 const router = Router();
 
-router.post("/signUp", validateSchema.validateBody(userDataSchema), authorizationController.signUp);
-router.post("/signIn", validateSchema.validateBody(userDataSchema), authorizationController.signIn);
+router.post("/signUp", validate.body(userDataSchema), authorizationController.signUp);
+router.post("/signIn", validate.body(userDataSchema), authorizationController.signIn);
 
 export default router;
