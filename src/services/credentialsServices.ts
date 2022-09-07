@@ -2,6 +2,7 @@ import { credentials } from "@prisma/client";
 
 import { credentialsRepository } from "../repositories/credentialsRepository";
 import { error } from "../utils/errorTypes";
+import { sensitiveDataEncrypter } from "../utils/savedSensitiveDataEncrypter";
 
 async function create(newCredentialData: Omit<credentials, "id">, userId: number) {
     const dbUserCredentials = await credentialsRepository.findUserCredentials(userId);
@@ -12,7 +13,8 @@ async function create(newCredentialData: Omit<credentials, "id">, userId: number
 
     await credentialsRepository.insert({
         ...newCredentialData,
-        userId
+        userId,
+        password: sensitiveDataEncrypter.encryptData(newCredentialData.password),
     });
 }
 
