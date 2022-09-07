@@ -1,8 +1,9 @@
 import { credentials } from "@prisma/client";
+import { secureHeapUsed } from "crypto";
 
 import { credentialsRepository } from "../repositories/credentialsRepository";
 import { error } from "../utils/errorTypes";
-import { sensitiveDataEncrypter } from "../utils/savedSensitiveDataEncrypter";
+import { encryptData, decryptData } from "../utils/savedSensitiveDataEncrypter";
 
 async function create(newCredentialData: Omit<credentials, "id">, userId: number) {
     const dbUserCredentials = await credentialsRepository.findUserCredentials(userId);
@@ -14,10 +15,22 @@ async function create(newCredentialData: Omit<credentials, "id">, userId: number
     await credentialsRepository.insert({
         ...newCredentialData,
         userId,
-        password: sensitiveDataEncrypter.encryptData(newCredentialData.password),
+        password: encryptData(newCredentialData.password),
     });
+}
+
+async function find(userId: number) {
+    const dbUserCredentials = await credentialsRepository.findUserCredentials(userId);
+
+    const formatCredentials = dbUserCredentials.map(c => {
+        return{...c, password: decryptData(c.password)}
+    });
+
+    return formatCredentials;
 }
 
 export const credentialsServices = {
     create,
+    find,
+
 }

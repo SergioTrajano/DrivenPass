@@ -6,6 +6,12 @@ interface IError {
 }
 
 export default function errorHandlerMiddleware(err: IError, req: Request, res: Response, next: NextFunction) {
+
+    if (err.code) {
+        res.status(err.code).send(err.message);
+        return;
+    }
+
     console.log(err);
-    res.status(err.code).send(err.message);
+    res.sendStatus(500);
 }

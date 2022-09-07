@@ -1,20 +1,12 @@
 import Cryptr from "cryptr";
-import dotenv from "dotenv";
-dotenv.config();
 
-const secret = process.env.CRYPTR_SECRET || "drivenpass"
+const CRYPTR_KEY: string = process.env.CRYPTR_KEY || "drivenpass";
+const cryptr = new Cryptr(CRYPTR_KEY);
 
-const cryptr = new Cryptr(secret);
-
-function encryptData(data: string) {
-    return cryptr.encrypt(data);
+export function encryptData(securityCode: string) {
+    return cryptr.encrypt(securityCode);
 }
 
-function decryptData(encryptedData: string) {
-    return cryptr.decrypt(encryptedData);
-}
-
-export const sensitiveDataEncrypter = {
-    encryptData,
-    decryptData
+export function decryptData(dbSecurityCode: string) {
+    return cryptr.decrypt(dbSecurityCode);
 }

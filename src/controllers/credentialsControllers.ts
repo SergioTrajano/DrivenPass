@@ -11,7 +11,17 @@ async function create(req: Request, res: Response) {
     res.sendStatus(201);
 }
 
+async function getUserCredentials(req: Request, res: Response) {
+    const { userId } = res.locals;
+
+    const userCredentials = await credentialsServices.find(userId);
+
+    res.status(200).send(userCredentials); 
+}
+
 export const controllers = {
     create,
+    getUserCredentials,
+
 }
 
