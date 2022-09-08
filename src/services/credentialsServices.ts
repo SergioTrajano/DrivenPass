@@ -11,11 +11,7 @@ async function create(newCredentialData: Omit<credentials, "id" | "userId">, use
     if (dbUserCredentials.some(credential => credential.label === newCredentialData.label)) {
         throw error.conflictError("label");
     }
-console.log({
-    ...newCredentialData,
-    userId,
-    password: encryptData(newCredentialData.password),
-})
+
     await credentialsRepository.insert({
         ...newCredentialData,
         userId,

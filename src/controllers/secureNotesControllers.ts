@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { secureNotes } from "@prisma/client";
+import { credentials, secureNotes } from "@prisma/client";
 
 import { secureNotesServices } from "../services/secureNotesServices";
 
@@ -12,7 +12,16 @@ async function create(req: Request, res: Response) {
     res.sendStatus(201);
 }
 
+async function findAll(req: Request, res: Response) {
+    const { userId } = res.locals;
+
+    const dbUserCredentials: secureNotes[] = await secureNotesServices.findAll(userId);
+
+    res.status(200).send(dbUserCredentials);
+}
+
 export const secureNotesController = {
     create,
+    findAll,
 
 }

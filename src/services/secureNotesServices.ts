@@ -16,7 +16,14 @@ async function create(newSecureNoteData: Omit<secureNotes, "id" | "userId">, use
     });
 }
 
+async function findAll(userId: number) {
+    const dbUserSecureNotes: secureNotes[] = await secureNotesClient.findAll(userId);
+
+    return dbUserSecureNotes;
+}
+
 export const secureNotesServices = {
     create,
+    findAll,
 
 }
