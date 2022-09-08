@@ -33,7 +33,7 @@ async function findById(id: number, userId: number) {
     const dbUserCredential = await credentialsRepository.findById(id);
 
     if (!dbUserCredential) throw error.notFountError("Credential");
-    if (dbUserCredential.userId !== userId) throw error.forbiddenError();
+    if (dbUserCredential.userId !== userId) throw error.forbiddenError("get");
 
     return {
         ...dbUserCredential,
@@ -41,9 +41,19 @@ async function findById(id: number, userId: number) {
     };
 }
 
+async function deleteById(id: number, userId: number) {
+    const dbUserCredential = await credentialsRepository.findById(id);
+
+    if (!dbUserCredential) throw error.notFountError("Credential");
+    if (dbUserCredential.userId !== userId) throw error.forbiddenError("delete");
+
+    await credentialsRepository.deleteById(id);
+}
+
 export const credentialsServices = {
     create,
     find,
     findById,
-
+    deleteById,
+    
 }

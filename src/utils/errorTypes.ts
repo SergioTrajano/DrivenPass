@@ -2,8 +2,9 @@ function unathorizedError() {
     throw { code:401, message: "invalid credentials" };
 }
 
-function forbiddenError() {
-    throw { code: 403, message: "You can not see other users infos" };
+function forbiddenError(method: string) {
+    if (method === "delete") throw { code: 403, message: "You can not delete other users infos" };
+    if (method === "get") throw { code: 403, message: "You can not see other users infos" };
 }
 
 function notFountError(entity: string) {

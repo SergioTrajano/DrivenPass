@@ -17,9 +17,14 @@ async function insert(credentialData: Omit<credentials, "id">) {
     await client.credentials.create({ data: credentialData });
 }
 
+async function deleteById(id: number) {
+    await client.credentials.delete({ where: { id }});
+}
+
 export const credentialsRepository = {
     findUserCredentials,
     insert,
     findById,
-
+    deleteById,
+    
 }

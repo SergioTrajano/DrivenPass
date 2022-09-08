@@ -28,10 +28,20 @@ async function getCredencial(req: Request, res: Response) {
     res.status(200).send(credential);
 }
 
+async function deleteCredential(req: Request, res: Response) {
+    const { userId } = res.locals;
+    const credentialId: number = Number(req.params.credentialId);
+
+    await credentialsServices.deleteById(credentialId, userId);
+
+    res.sendStatus(200);
+}
+
 export const controllers = {
     create,
     getUserCredentials,
     getCredencial,
-
+    deleteCredential,
+    
 }
 
