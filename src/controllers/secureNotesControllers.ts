@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { credentials, secureNotes } from "@prisma/client";
+import { secureNotes } from "@prisma/client";
 
 import { secureNotesServices } from "../services/secureNotesServices";
 
@@ -29,9 +29,19 @@ async function findById(req: Request, res: Response) {
     res.status(200).send(dbUserCredentials);
 }
 
+async function deleteById(req: Request, res: Response) {
+    const { userId } = res.locals;
+    const secureNoteId = Number(req.params.secureNoteId);
+
+    await secureNotesServices.deleteById(secureNoteId, userId);
+
+    res.sendStatus(200);
+}
+
 export const secureNotesController = {
     create,
     findAll,
     findById,
+    deleteById,
 
 }

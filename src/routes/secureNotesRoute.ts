@@ -13,4 +13,6 @@ router.post("/secureNotes", validate.headers(headerSchema), validate.body(create
 router.get("/secureNotes", validate.headers(headerSchema), validateHeaderData, secureNotesController.findAll);
 router.get("/secureNotes/:secureNoteId", validate.headers(headerSchema), validateHeaderData, secureNotesController.findById);
 
+router.delete("/secureNotes/:secureNoteId", validate.headers(headerSchema), validateHeaderData, secureNotesController.deleteById);
+
 export default router;

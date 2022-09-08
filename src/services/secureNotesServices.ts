@@ -31,9 +31,19 @@ async function findById(secureNoteId: number, userId: number) {
     return dbUserSecureNote;
 }
 
+async function deleteById(secureNoteId: number, userId: number) {
+    const dbUserSecureNote: any = await secureNotesClient.findById(secureNoteId);
+
+    if (!dbUserSecureNote) throw error.notFountError("Secure note");
+    if (dbUserSecureNote.userId !== userId) throw error.forbiddenError("delete");
+
+    await secureNotesClient.deleteById(secureNoteId);
+}
+
 export const secureNotesServices = {
     create,
     findAll,
     findById,
+    deleteById,
 
 }

@@ -17,8 +17,14 @@ async function create(newSecureNotesData: Omit<secureNotes, "id">) {
     await client.secureNotes.create({ data: newSecureNotesData });
 }
 
+async function deleteById(id: number) {
+    await client.secureNotes.delete({ where: { id }});
+}
+
 export const secureNotesClient = {
     findAll,
     create,
     findById,
+    deleteById,
+
 }
