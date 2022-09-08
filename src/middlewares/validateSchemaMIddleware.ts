@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectSchema } from "joi";
 
+import { error as err } from "../utils/errorTypes";
+
 
 function body(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -9,21 +11,21 @@ function body(schema: ObjectSchema) {
         const { error } = schema.validate(body, { abortEarly: false });
 
         if (error) {
-            throw {code: 422, message: error.details.map(e => e.message)};
+            throw err.unprocessableEntityError(error);
         }
 
         next();
     }
 }
 
-function header(schema: ObjectSchema) {
+function headers(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
         const headers: object = req.headers;
 
         const { error } = schema.validate(headers, { abortEarly: false });
 
         if (error) {
-            throw {code: 422, message: error.details.map(e => e.message)};
+            throw err.unprocessableEntityError(error);
         }
 
         next();
@@ -32,5 +34,5 @@ function header(schema: ObjectSchema) {
 
 export const validate = {
     body,
-    header,
+    headers,
 }

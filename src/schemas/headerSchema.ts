@@ -1,7 +1,7 @@
 import joi from "joi";
 
 const headerSchema = joi.object({
-    Authorization: joi.string().pattern(/^Bearer /),
+    authorization: joi.string().pattern(/^Bearer /).required(),
 }).options({ allowUnknown: true });
 
 export default headerSchema;
