@@ -9,6 +9,7 @@ import validateHeaderData from "../middlewares/validateHeaderData";
 const router = Router();
 
 router.post("/credentials", validate.header(headerSchema), validate.body(credentialSchemas.create), validateHeaderData, controllers.create);
-router.get("/credentials", validate.header(headerSchema), controllers.getUserCredentials);
+router.get("/credentials", validate.header(headerSchema), validateHeaderData, controllers.getUserCredentials);
+router.get("/credentials/:credentialId", validate.header(headerSchema), validateHeaderData, controllers.getCredencial);
 
 export default router;

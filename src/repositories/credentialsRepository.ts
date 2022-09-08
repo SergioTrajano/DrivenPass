@@ -7,6 +7,12 @@ async function findUserCredentials(userId: number) {
     return userCredentials;
 }
 
+async function findById(id: number) {
+    const userCredentials = await client.credentials.findUnique({ where: { id }});
+
+    return userCredentials;
+}
+
 async function insert(credentialData: Omit<credentials, "id">) {
     await client.credentials.create({ data: credentialData });
 }
@@ -14,4 +20,6 @@ async function insert(credentialData: Omit<credentials, "id">) {
 export const credentialsRepository = {
     findUserCredentials,
     insert,
+    findById,
+
 }

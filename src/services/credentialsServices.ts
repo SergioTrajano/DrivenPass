@@ -29,8 +29,21 @@ async function find(userId: number) {
     return formatCredentials;
 }
 
+async function findById(id: number, userId: number) {
+    const dbUserCredential = await credentialsRepository.findById(id);
+
+    if (!dbUserCredential) throw error.notFountError("Credential");
+    if (dbUserCredential.userId !== userId) throw error.forbiddenError();
+
+    return {
+        ...dbUserCredential,
+        password: decryptData(dbUserCredential.password)
+    };
+}
+
 export const credentialsServices = {
     create,
     find,
+    findById,
 
 }

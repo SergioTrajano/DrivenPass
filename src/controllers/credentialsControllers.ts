@@ -19,9 +19,19 @@ async function getUserCredentials(req: Request, res: Response) {
     res.status(200).send(userCredentials); 
 }
 
+async function getCredencial(req: Request, res: Response) {
+    const { userId } = res.locals;
+    const credentialId: number = Number(req.params.credentialId);
+
+    const credential = await credentialsServices.findById(credentialId, userId);
+
+    res.status(200).send(credential);
+}
+
 export const controllers = {
     create,
     getUserCredentials,
+    getCredencial,
 
 }
 

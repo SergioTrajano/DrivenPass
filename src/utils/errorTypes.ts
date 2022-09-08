@@ -6,8 +6,8 @@ function forbiddenError() {
     throw { code: 403, message: "You can not see other users infos" };
 }
 
-function notFountError() {
-    throw { code: 404, message: "User does not exist" };
+function notFountError(entity: string) {
+    throw { code: 404, message: `${entity} does not exist` };
 }
 
 function conflictError(entity: String) {
