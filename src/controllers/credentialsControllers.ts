@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import { credentials } from "@prisma/client";
 
 import { credentialsServices } from "../services/credentialsServices"
 
 async function create(req: Request, res: Response) {
-    const credentialData = req.body;
+    const credentialData: Omit<credentials, "id" | "userId"> = req.body;
     const { userId } = res.locals;
 
     await credentialsServices.create(credentialData, userId);

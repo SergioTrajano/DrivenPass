@@ -1,9 +1,10 @@
+import { users } from "@prisma/client";
 import { Request, Response } from "express";
 
 import * as services from "../services/authorizationServices";
 
 export async function signUp(req: Request, res: Response) {
-    const userData = req.body;
+    const userData: Omit<users, "id"> = req.body;
 
     await services.signUp(userData);
 
@@ -11,7 +12,7 @@ export async function signUp(req: Request, res: Response) {
 }
 
 export async function signIn(req: Request, res: Response) {
-    const userData = req.body;
+    const userData: Omit<users, "id"> = req.body;
 
     const token = await services.signIn(userData);
 

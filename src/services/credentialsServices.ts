@@ -5,7 +5,7 @@ import { credentialsRepository } from "../repositories/credentialsRepository";
 import { error } from "../utils/errorTypes";
 import { encryptData, decryptData } from "../utils/savedSensitiveDataEncrypter";
 
-async function create(newCredentialData: Omit<credentials, "id">, userId: number) {
+async function create(newCredentialData: Omit<credentials, "id" | "userId">, userId: number) {
     const dbUserCredentials = await credentialsRepository.findUserCredentials(userId);
 
     if (dbUserCredentials.some(credential => credential.label === newCredentialData.label)) {
