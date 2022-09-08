@@ -11,5 +11,6 @@ const router = Router();
 router.post("/secureNotes", validate.headers(headerSchema), validate.body(createSchema), validateHeaderData, secureNotesController.create);
 
 router.get("/secureNotes", validate.headers(headerSchema), validateHeaderData, secureNotesController.findAll);
+router.get("/secureNotes/:secureNoteId", validate.headers(headerSchema), validateHeaderData, secureNotesController.findById);
 
 export default router;

@@ -7,6 +7,12 @@ async function findAll(userId: number) {
     return dbUserCards;
 }
 
+async function findById(id: number) {
+    const dbSecureNote = await client.secureNotes.findUnique({ where: { id }});
+
+    return dbSecureNote;
+}
+
 async function create(newSecureNotesData: Omit<secureNotes, "id">) {
     await client.secureNotes.create({ data: newSecureNotesData });
 }
@@ -14,5 +20,5 @@ async function create(newSecureNotesData: Omit<secureNotes, "id">) {
 export const secureNotesClient = {
     findAll,
     create,
-    
+    findById,
 }

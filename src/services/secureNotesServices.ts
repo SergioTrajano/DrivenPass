@@ -22,8 +22,18 @@ async function findAll(userId: number) {
     return dbUserSecureNotes;
 }
 
+async function findById(secureNoteId: number, userId: number) {
+    const dbUserSecureNote: any = await secureNotesClient.findById(secureNoteId);
+
+    if (!dbUserSecureNote) throw error.notFountError("Secure note");
+    if (dbUserSecureNote.userId !== userId) throw error.forbiddenError("get");
+
+    return dbUserSecureNote;
+}
+
 export const secureNotesServices = {
     create,
     findAll,
+    findById,
 
 }

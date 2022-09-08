@@ -20,8 +20,18 @@ async function findAll(req: Request, res: Response) {
     res.status(200).send(dbUserCredentials);
 }
 
+async function findById(req: Request, res: Response) {
+    const { userId } = res.locals;
+    const secureNoteId = Number(req.params.secureNoteId);
+
+    const dbUserCredentials: secureNotes = await secureNotesServices.findById(secureNoteId, userId);
+
+    res.status(200).send(dbUserCredentials);
+}
+
 export const secureNotesController = {
     create,
     findAll,
+    findById,
 
 }
