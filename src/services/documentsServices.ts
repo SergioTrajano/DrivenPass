@@ -28,8 +28,18 @@ async function findById(documentId: number, userId: number) {
     return dbDocument;
 }
 
+async function deleteById(documentId: number, userId: number) {
+    const dbDocument = await documentsRepository.findById(documentId);
+
+    if (!dbDocument) throw error.notFountError("Document");
+    if (dbDocument.userId !== userId) throw error.forbiddenError("delete");
+
+    await documentsRepository.deleteById(documentId);
+}
+
 export const documentServices = {
     create,
     findAll,
     findById,
+    deleteById,
 }

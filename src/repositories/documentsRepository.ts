@@ -17,8 +17,13 @@ async function findById(documentId: number) {
     return dbDocument;
 }
 
+async function deleteById(documentId: number) {
+    await client.documents.delete({ where: { id: documentId } });
+}
+
 export const documentsRepository = {
     create,
     findAll,
     findById,
+    deleteById,
 }

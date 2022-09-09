@@ -28,8 +28,18 @@ async function findById(req: Request, res: Response) {
     res.status(200).send(dbDocument);
 }
 
+async function deleteById(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+    const documentId: number = Number(req.params.documentId);
+
+    await documentServices.deleteById(documentId, userId);
+
+    res.sendStatus(200);
+}
+
 export const documentControllers = {
     create,
     findAll,
     findById,
+    deleteById,
 }

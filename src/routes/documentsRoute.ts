@@ -13,4 +13,6 @@ router.post("/documents", validate.headers(headerSchema), validate.body(document
 router.get("/documents", validate.headers(headerSchema), validateHeaderData, documentControllers.findAll);
 router.get("/documents/:documentId", validate.headers(headerSchema), validateHeaderData, documentControllers.findById);
 
+router.delete("/documents/:documentId", validate.headers(headerSchema), validateHeaderData, documentControllers.deleteById);
+
 export default router;
