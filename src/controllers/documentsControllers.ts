@@ -19,7 +19,17 @@ async function findAll(req: Request, res: Response) {
     res.status(200).send(dbUserdocuments);
 }
 
+async function findById(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+    const documentId: number = Number(req.params.documentId);
+
+    const dbDocument = await documentServices.findById(documentId, userId);
+
+    res.status(200).send(dbDocument);
+}
+
 export const documentControllers = {
     create,
     findAll,
+    findById,
 }

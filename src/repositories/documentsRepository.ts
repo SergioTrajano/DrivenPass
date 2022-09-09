@@ -11,7 +11,14 @@ async function findAll(userId: number) {
     return dbUserdocuments;
 }
 
+async function findById(documentId: number) {
+    const dbDocument = await client.documents.findUnique({ where: { id: documentId } });
+
+    return dbDocument;
+}
+
 export const documentsRepository = {
     create,
     findAll,
+    findById,
 }

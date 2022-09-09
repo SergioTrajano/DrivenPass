@@ -19,7 +19,17 @@ async function findAll(userId: number) {
     return dbUserdocuments;
 }
 
+async function findById(documentId: number, userId: number) {
+    const dbDocument = await documentsRepository.findById(documentId);
+
+    if (!dbDocument) throw error.notFountError("Document");
+    if (dbDocument.userId !== userId) throw error.forbiddenError("get");
+
+    return dbDocument;
+}
+
 export const documentServices = {
     create,
     findAll,
+    findById,
 }
