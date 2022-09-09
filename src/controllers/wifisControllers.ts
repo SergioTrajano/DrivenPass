@@ -11,6 +11,15 @@ async function create(req: Request, res: Response) {
     res.sendStatus(201);
 }
 
+async function findAll(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+
+    const dbUserWifis: wifis[] = await wifisServices.findAll(userId);
+
+    res.status(200).send(dbUserWifis);
+}
+
 export const wifisControllers = {
     create,
+    findAll,
 }
