@@ -54,7 +54,7 @@ model cards {
   label String
   cardNumber String 
   cardHolderName String
-  securityCode String @db.VarChar(3)
+  securityCode String
   expirationDate String @db.VarChar(5)
   password String
   isVirtual Boolean @default(false)

@@ -1,7 +1,6 @@
 import joi from "joi";
 
 export const createSchema = joi.object({
-    userId: joi.number().integer().required(),
     label: joi.string().trim().required(),
     cardNumber: joi.string().trim().required(),
     cardHolderName: joi.string().trim().required(),
