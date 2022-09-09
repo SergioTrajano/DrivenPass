@@ -11,6 +11,15 @@ async function create(req: Request, res: Response) {
     res.sendStatus(201);
 }
 
+async function findAll(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+
+    const dbUserdocuments: documents[] = await documentServices.findAll(userId);
+
+    res.status(200).send(dbUserdocuments);
+}
+
 export const documentControllers = {
     create,
+    findAll,
 }
