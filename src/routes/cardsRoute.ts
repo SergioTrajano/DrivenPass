@@ -10,4 +10,7 @@ const router = Router();
 
 router.post("/cards", validate.headers(headerSchema), validate.body(createSchema), validateHeaderData, cardController.create);
 
+router.get("/cards", validate.headers(headerSchema), validateHeaderData, cardController.findAll);
+router.get("/cards/:cardId", validate.headers(headerSchema), validateHeaderData, cardController.findCardById);
+
 export default router;

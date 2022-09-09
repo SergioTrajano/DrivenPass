@@ -11,8 +11,14 @@ async function create(newCardData: Omit<cards, "id">) {
     await client.cards.create({ data: newCardData});
 }
 
+async function findById(cardId: number) {
+    const dbCard = await client.cards.findUnique({ where: { id: cardId } });
+
+    return dbCard;
+}
+
 export const cardsRepository = {
     findAll,
     create,
-
+    findById,
 }

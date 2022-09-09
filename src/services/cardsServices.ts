@@ -16,7 +16,35 @@ async function create(newCardData: Omit<cards, "id" | "userId">, userId: number)
     });
 }
 
+async function finddAll(userId: number) {
+    const dbUserCards: cards[] = await cardsRepository.findAll(userId);
+
+    const decryptedCards: cards[] = dbUserCards.map(card => {
+        return {
+            ...card,
+            password: decryptData(card.password),
+            securityCode: decryptData(card.securityCode),
+        }
+    });
+
+    return decryptedCards;
+}
+
+async function findCardById(cardId: number, userId: number) {
+    const dbCard = await cardsRepository.findById(cardId);
+
+    if (!dbCard) throw error.notFountError("Card");
+    if (dbCard?.userId !== userId) throw error.forbiddenError("get");
+
+    return {
+        ...dbCard,
+        password: decryptData(dbCard.password),
+        securityCode: decryptData(dbCard.securityCode),
+    };
+}
+
 export const cardsServices = {
     create,
-
+    finddAll,
+    findCardById,
 }
