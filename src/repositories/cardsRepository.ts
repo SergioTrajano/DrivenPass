@@ -17,8 +17,13 @@ async function findById(cardId: number) {
     return dbCard;
 }
 
+async function deleteById(cardId: number) {
+    await client.cards.delete({ where: { id: cardId } });
+}
+
 export const cardsRepository = {
     findAll,
     create,
     findById,
+    deleteById,
 }

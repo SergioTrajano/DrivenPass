@@ -13,4 +13,6 @@ router.post("/cards", validate.headers(headerSchema), validate.body(createSchema
 router.get("/cards", validate.headers(headerSchema), validateHeaderData, cardController.findAll);
 router.get("/cards/:cardId", validate.headers(headerSchema), validateHeaderData, cardController.findCardById);
 
+router.delete("/cards/:cardId", validate.headers(headerSchema), validateHeaderData, cardController.deleteById);
+
 export default router;

@@ -28,8 +28,18 @@ async function findCardById(req: Request, res: Response) {
     res.status(200).send(dbCard);
 }
 
+async function deleteById(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+    const cardId: number = Number(req.params.cardId);
+
+    await cardsServices.deleteById(cardId, userId);
+
+    res.sendStatus(200);
+}
+
 export const cardController = {
     create,
     findAll,
     findCardById,
+    deleteById,
 }

@@ -43,8 +43,18 @@ async function findCardById(cardId: number, userId: number) {
     };
 }
 
+async function deleteById(cardId: number, userId: number) {
+    const dbCard = await cardsRepository.findById(cardId);
+
+    if (!dbCard) throw error.notFountError("Card");
+    if (dbCard.userId !== userId) throw error.forbiddenError("delete");
+
+    await cardsRepository.deleteById(cardId);
+}
+
 export const cardsServices = {
     create,
     finddAll,
     findCardById,
+    deleteById,
 }
