@@ -81,8 +81,8 @@ enum documentTypes {
 model documents {
   id Int @id @default(autoincrement())
   fullName String
-  issueDate DateTime
-  expirationDate DateTime
+  issueDate String @db.VarChar(8)
+  expirationDate String @db.VarChar(8)
   registrationNumber Int
   issuingBody String
   type documentTypes
