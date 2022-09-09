@@ -28,8 +28,18 @@ async function findById(req: Request, res: Response) {
     res.status(200).send(dbWifi);
 }
 
+async function deleteById(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+    const wifiId: number = Number(req.params.wifiId);
+
+    await wifisServices.deleteById(wifiId, userId);
+
+    res.sendStatus(200);
+}
+
 export const wifisControllers = {
     create,
     findAll,
     findById,
+    deleteById,
 }

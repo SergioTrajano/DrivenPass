@@ -17,8 +17,13 @@ async function findById(wifiId: number) {
     return dbWifi;
 }
 
+async function deleteById(wifiId: number) {
+    await client.wifis.delete({ where: { id: wifiId } });
+}
+
 export const wifisRepository = {
     create,
     findAll,
     findById,
+    deleteById,
 }

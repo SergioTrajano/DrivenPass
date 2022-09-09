@@ -36,8 +36,18 @@ async function findById(wifiId: number, userId: number) {
     };
 }
 
+async function deleteById(wifiId: number, userId: number) {
+    const dbWifi = await wifisRepository.findById(wifiId);
+
+    if (!dbWifi) throw error.notFountError("Wifi");
+    if (dbWifi.userId !== userId) throw error.forbiddenError("delete");
+
+    await wifisRepository.deleteById(wifiId);
+}
+
 export const wifisServices = {
     create,
     findAll,
     findById,
+    deleteById,
 }

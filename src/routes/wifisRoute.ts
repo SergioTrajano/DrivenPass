@@ -13,4 +13,6 @@ router.post("/wifis", validate.headers(headerSchema), validate.body(wifiCreateSc
 router.get("/wifis", validate.headers(headerSchema), validateHeaderData, wifisControllers.findAll);
 router.get("/wifis/:wifiId", validate.headers(headerSchema), validateHeaderData, wifisControllers.findById);
 
+router.delete("/wifis/:wifiId", validate.headers(headerSchema), validateHeaderData, wifisControllers.deleteById);
+
 export default router;
