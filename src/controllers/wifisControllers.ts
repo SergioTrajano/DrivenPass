@@ -19,7 +19,17 @@ async function findAll(req: Request, res: Response) {
     res.status(200).send(dbUserWifis);
 }
 
+async function findById(req: Request, res: Response) {
+    const userId: number = Number(res.locals.userId);
+    const wifiId: number = Number(req.params.wifiId);
+
+    const dbWifi = await wifisServices.findById(wifiId, userId);
+
+    res.status(200).send(dbWifi);
+}
+
 export const wifisControllers = {
     create,
     findAll,
+    findById,
 }

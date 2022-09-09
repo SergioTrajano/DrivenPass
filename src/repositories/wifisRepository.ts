@@ -11,7 +11,14 @@ async function findAll(userId: number) {
     return dbUserWifis;
 }
 
+async function findById(wifiId: number) {
+    const dbWifi = await client.wifis.findUnique({ where: { id: wifiId } });
+
+    return dbWifi;
+}
+
 export const wifisRepository = {
     create,
     findAll,
+    findById,
 }
