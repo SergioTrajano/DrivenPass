@@ -10,12 +10,12 @@ export async function signUp({email, password } : { email: string, password: str
     await usersRepository.insertUser({
         email,
         password: passwordEncrypter.hashPassword(password),
-    }); console.log("cheguei aqui")
+    });
 }
 
 export async function signIn({email, password } : { email: string, password: string}) {
     const dbUser = await usersRepository.findUserByEmail(email);
-    if (!dbUser || !passwordEncrypter.comparePassword(password, dbUser.password)) error.unathorizedError();
+    if (!dbUser || !passwordEncrypter.comparePassword(password, dbUser.password)) throw error.unathorizedError();
     
     const token = tokenManipulation.generateToken(dbUser);
 
