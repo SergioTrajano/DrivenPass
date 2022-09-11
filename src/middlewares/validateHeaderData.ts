@@ -2,8 +2,6 @@ import { Request, Response, NextFunction } from "express";
 
 import { tokenManipulation } from "../utils/generateToken";
 import { usersRepository } from "../repositories/usersRepository";
-import { comparePassword } from "../utils/passwordEncrypter";
-import { error } from "../utils/errorTypes";
 
 export default async function validateHeaderData(req: Request, res: Response, next: NextFunction) {
     const token = req.headers.authorization?.replace("Bearer ", "");
@@ -13,5 +11,5 @@ export default async function validateHeaderData(req: Request, res: Response, ne
     if(!dbUsers || userData.password !== dbUsers.password) throw {code: 403, message: "Invalid token!"};
 
     res.locals.userId = userData.id;
-    next(); 
+    next();  
 }
