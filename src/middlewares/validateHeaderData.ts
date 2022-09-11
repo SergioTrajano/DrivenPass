@@ -13,5 +13,5 @@ export default async function validateHeaderData(req: Request, res: Response, ne
     if(!dbUsers || userData.password !== dbUsers.password) throw {code: 403, message: "Invalid token!"};
 
     res.locals.userId = userData.id;
-    next();
+    next(); 
 }
