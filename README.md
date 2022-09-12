@@ -356,3 +356,106 @@ Deve ser enviada no header da requezição pelo "Authorization" um token no form
 Caso não exista wifi com o id passado, retorna status 404.
 Caso a wifi com o id passado exista, mas não for do usuário, retorna status 403.
 Tudo estando correto, retorna statusCode 200.
+
+ # Rota criação e gerenciamento de credenciais
+ 
+ ## Rota <span style="color:yellow"> **POST** </span>/documents
+
+Essa rota permite criar documentos.
+
+O Body da requisição deve ser feito no seguinte formato:
+
+```json
+{
+  "fullName": "AAA AAAB", //string
+  "issueDate": "12/12/12", //string
+  "expirationDate": "12/12/95", //string
+  "registrationNumber": 123456789, //number
+  "issuingBody": "SDS", //string
+  "type": "typo_documento" //"RG" ou "CNH"
+}
+```
+
+Deve ser enviada no header da requezição pelo "Authorization" um token no formato "Bearer token". Caso não seja enviado, retorna status 422. Caso o "Authorization" seja enviado, mas o token seja invalido, retorna status 403.
+Caso haja algum erro no body, retorna status 422.
+Caso o campo "type" seja igual a outro "type" usado pelo usuário, retorna status 409.
+Tudo estando correto, retorna statusCode 201.
+
+ ## Rota <span style="color:yellow"> **GET** </span>/documents
+
+Essa rota permite o usuário ver seus documentos criadas.
+
+Deve ser enviada no header da requezição pelo "Authorization" um token no formato "Bearer token". Caso não seja enviado, retorna status 422. Caso o "Authorization" seja enviado, mas o token seja invalido, retorna status 403.
+Tudo estando correto, retorna statusCode 200. E um array de objetos com as informações de seus documentos na forma:
+
+```json
+[
+  {
+    "id": 6,
+    "fullName": "AAA AAAB",
+    "issueDate": "12/12/12",
+    "expirationDate": "12/12/95",
+    "registrationNumber": 123456789,
+    "issuingBody": "SDS",
+    "type": "CNH",
+    "userId": 34
+  },
+  {
+    "id": 7,
+    "fullName": "AAA AAAB",
+    "issueDate": "12/12/12",
+    "expirationDate": "12/12/95",
+    "registrationNumber": 123456789,
+    "issuingBody": "SDS",
+    "type": "RG",
+    "userId": 34
+  }
+]
+```
+
+ ## Rota <span style="color:yellow"> **GET** </span>/documents/:id
+
+Essa rota permite o usuário ver pelo id uma de seus documentos criados.
+
+Deve ser enviada no header da requezição pelo "Authorization" um token no formato "Bearer token". Caso não seja enviado, retorna status 422. Caso o "Authorization" seja enviado, mas o token seja invalido, retorna status 403.
+Caso não exista documento com o id passado, retorna status 404.
+Caso o documento com o id passado exista, mas não for do usuário, retorna status 403.
+Tudo estando correto, retorna statusCode 200. E um objeto com as informações do documento pesquisado na forma:
+
+```json
+{
+"id": 7,
+"fullName": "AAA AAAB",
+"issueDate": "12/12/12",
+"expirationDate": "12/12/95",
+"registrationNumber": 123456789,
+"issuingBody": "SDS",
+"type": "RG",
+"userId": 34
+}
+```
+
+ ## Rota <span style="color:yellow"> **DELETE** </span>/documents/:id
+
+Essa rota permite o usuário deletar pelo id uma de seus documentos criados.
+
+Deve ser enviada no header da requezição pelo "Authorization" um token no formato "Bearer token". Caso não seja enviado, retorna status 422. Caso o "Authorization" seja enviado, mas o token seja invalido, retorna status 403.
+Caso não exista documento com o id passado, retorna status 404.
+Caso o documento com o id passado exista, mas não for do usuário, retorna status 403.
+Tudo estando correto, retorna statusCode 200.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
