@@ -473,8 +473,26 @@ Caso não exista documento com o id passado, retorna status 404.
 Caso o documento com o id passado exista, mas não for do usuário, retorna status 403.
 Tudo estando correto, retorna statusCode 200.
 
+***
 
+## 🏁 Rodando a aplicação
 
+Primeiro, faça o clone desse repositório na sua maquina:
+
+```
+git clone https://github.com/SergioTrajano/DrivenPass-API
+```
+
+Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias.
+
+```
+npm install
+```
+
+Finalizado o processo, é só inicializar o servidor
+```
+npm start
+```
 
 
 
