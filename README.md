@@ -1,4 +1,33 @@
-# projeto19-DrivenPass
+# <p align = "center"> DrivenPass </p>
+
+<p align="center">
+   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsE07I6Txa-3pnvgnWs5zOO0rmFvmD_3E_A&usqp=CAU"/>
+</p>
+
+<p align = "center">
+   <img src="https://img.shields.io/badge/author-SergioTrajano-4dae71?style=flat-square" />
+   <img src="https://img.shields.io/github/languages/count/SergioTrajano/DrivenPass-API?color=4dae71&style=flat-square" />
+</p>
+
+
+##  :clipboard: Descrição
+
+Navegar na internet pode ser uma atividade muito divertida, mas ao mesmo tempo, muito perigosa. Inúmeros estudos e levantamentos (nacionais e internacionais) mostram que o número de golpes virtuais não para de crescer. O que levanta a questão: como nos proteger?
+Está aplicação é um gerenciador de senhas e dados pessoais que ajuda a tratar esse problema.
+
+***
+
+## :computer:	 Tecnologias e Conceitos
+
+- REST APIs
+- JWTs & refresh tokens
+- Node.js
+- TypeScript
+- PostgreSQL
+- PrismaOMR
+- Cryptr e Bcrypt
+
+***
 
 # Rotas de criação e gerenciamento de usuários:
 
